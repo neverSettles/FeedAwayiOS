@@ -1,0 +1,47 @@
+[
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "div[tab-identifier=FEwhat_to_watch]"
+        },
+        "trigger": {
+            "url-filter": ".*youtube.com.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "ytm-pivot-bar-renderer[role=tablist]"
+        },
+        "trigger": {
+            "url-filter": ".*youtube.com.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "ytm-item-section-renderer[section-identifier=related-items]"
+        },
+        "trigger": {
+            "url-filter": ".*youtube.com/watch.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "#YtSparklesVisibilityIdentifier"
+        },
+        "trigger": {
+            "url-filter": ".*youtube.com/watch.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "div[role=main]"
+        },
+        "trigger": {
+            "url-filter": ".*m.facebook.com.*"
+        }
+    }
+]
