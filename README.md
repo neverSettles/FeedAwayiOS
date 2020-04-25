@@ -1,5 +1,5 @@
 # FeedAway
-Remove distracting feeds from social networking sites like Facebook, Youtube, LinkedIn. 
+Manage your relationship with social media. Remove distracting feeds from sites like Facebook, Youtube, LinkedIn. 
 
 
 A productivity iOS application focusing on removing distracting news feeds from popular social media websites, without 
