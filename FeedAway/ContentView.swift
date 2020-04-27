@@ -7,9 +7,12 @@
 //
 
 import SwiftUI
+import SafariServices
+//import BlockerManager
 
 struct ContentView: View {
     @State private var facebook = false
+    
     var body: some View {
         VStack {
             Text("Feed Away!")
@@ -19,8 +22,10 @@ struct ContentView: View {
                 .frame(width: 32.0, height: 32.0)
                 Button(action: {
                     self.facebook.toggle()
+                    NSLog("Making call to reloadBlocker()")
+                    BlockerManager().reloadBlocker()
                 }) {
-                    Text("Remove facebook feed")
+                    Text("Reload Content Blocker")
                 }
             }
             if facebook {

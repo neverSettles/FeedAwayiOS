@@ -1,0 +1,141 @@
+ytm-item-section-renderer: section-identifier="related-items"
+
+
+
+Goal:
+^(?!(.*youtube.com/watch.*)).*$
+
+Things that worked:
+^(.*youtube.com/watch.*)$
+^((.*youtube.com/watch.*))$
+^((.*youtube.com/watch)).*$
+
+To try:
+^.*youtube.com.$
+
+Do not work:
+^(?!(.*youtube.com/watch)).*$
+^(?=(.*youtube.com/watch)).*$
+^.*youtube.com(?!/results|/watch)
+
+Plan: Remove some of the stuff that blocks google and blocks illinois
+$('div[tab-identifier="FEwhat_to_watch"]').style = "display: none;"
+.page-container
+
+{
+    "action": {
+        "type": "css-display-none",
+        "selector": ".page-container"
+    },
+    "trigger": {
+        "url-filter": ".*youtube.*$"
+    }
+},
+.page-container
+
+###### Finished product: #######
+
+[
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "div[tab-identifier=FEwhat_to_watch]"
+        },
+        "trigger": {
+            "url-filter": ".*youtube.com.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "ytm-pivot-bar-renderer[role=tablist]"
+        },
+        "trigger": {
+            "url-filter": ".*youtube.com.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "ytm-item-section-renderer[section-identifier=related-items]"
+        },
+        "trigger": {
+            "url-filter": ".*youtube.com/watch.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "#YtSparklesVisibilityIdentifier"
+        },
+        "trigger": {
+            "url-filter": ".*youtube.com/watch.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "div[role=main]"
+        },
+        "trigger": {
+            "url-filter": ".*m.facebook.com.*"
+        }
+    }
+]
+
+To do next:
+
+1. Reload the content blocker automatically on load
+2. Make pretty gui with Button / switch
+3. Design a logo
+
+This stack overflow post explains how to open the safari console dom inspector for safari running on a simulator or on your actual device. That way, we can see the actual dom elements that we need to remove. 
+https://stackoverflow.com/questions/27953374/what-is-wkerrordomain-error-4-from-wkwebview
+
+Currently, I'm trying to reload the content blocker information at the start loading of the app. But I keep getting thise error: 
+In SceneDelegate.swift : 
+SFContentBlockerManager.reloadContentBlocker(
+            withIdentifier: "com.example.FeedAway.FeedRemover",
+            completionHandler: { (maybeErr: Error?) -> Void in
+            if let err = maybeErr {
+                NSLog("Error reloading Content Blocker:")
+                NSLog(err.localizedDescription)
+            } else {
+                NSLog("Finished reloading Content Blocker")
+            }
+        })
+
+2020-04-26 18:29:58.349470-0500 FeedAway[71280:447188] Error reloading Content Blocker:
+2020-04-26 18:29:58.350875-0500 FeedAway[71280:447188] The operation couldn’t be completed. (WKErrorDomain error 2.)
+
+This error even shows up when I close all apps running on the simulator and then relaunch the app. 
+
+However, if I keep all apps open and I go to Settings -> Safari -> ContentBlockers -> Disable FeedAway, Then relaunch the app, I get 
+2020-04-26 19:16:31.254833-0500 FeedAway[71662:483696] Finished reloading Content Blocker
+
+If I change it to withIdentifier: "com.example.FeedAway.FeedRemover", , I get 
+2020-04-26 19:10:44.931373-0500 FeedAway[71530:474290] The operation couldn’t be completed. (SFErrorDomain error 1.)
+
+And If I disable Feedaway in settings, and use withIdentifier: "com.example.FeedAway.FeedRemover", I get
+2020-04-26 19:17:27.957995-0500 FeedAway[71722:485311] The operation couldn’t be completed. (SFErrorDomain error 1.)
+
+This indicates that I got the FeedBlocker identifier correct, but there seems to be issues with reloading a content blocker that is Currently active. Thus, I n
+
+
+I think I'm reloading incorrectly. I need to figure out a way to reload a content blocker that is current active. 
+This stack overflow post seems promising, but is not answered yet: 
+https://stackoverflow.com/questions/61411329/how-to-reload-content-blockers-while-they-are-active
+
+Update: I fixed this problem!!! 
+
+It turns out, the reload only fails when the json is invalid. I was originally purposefully making the json invalid so that the content blocker wouldn't block the correct content, 
+but that strategy wasn't a good idea in general. Now, when I relaunch the application, it automatically gets updated with the new json. 
+
+I can also now test the json when starting the app because it will give a reload error if the json is invalid (This appears to be the only reason reload returns an error)
+
+
+Next step: try to read through stack overflow posts to get an idea of how to use content blocker extension code. 
+https://stackoverflow.com/questions/tagged/safari-content-blocker?tab=Newest
+
+These in particular seem interesting:
+https://stackoverflow.com/questions/32151109/reloading-content-blockers-in-ios
