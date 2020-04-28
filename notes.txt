@@ -139,3 +139,6 @@ https://stackoverflow.com/questions/tagged/safari-content-blocker?tab=Newest
 
 These in particular seem interesting:
 https://stackoverflow.com/questions/32151109/reloading-content-blockers-in-ios
+
+To check if app is installed : 
+https://stackoverflow.com/questions/26510336/check-whether-an-app-is-installed-using-swift?answertab=active#tab-top
