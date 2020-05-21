@@ -142,3 +142,9 @@ https://stackoverflow.com/questions/32151109/reloading-content-blockers-in-ios
 
 To check if app is installed : 
 https://stackoverflow.com/questions/26510336/check-whether-an-app-is-installed-using-swift?answertab=active#tab-top
+
+I was able to see how to check to see if facebook was installed. 
+
+I had to add 'fb' key to the Info.plist file, and then use UIApplication.shared.canOpenURL(fbUrl! as URL) to see if I can open "fb://" (As shown in code)
+
+To do next: Figure out how to dynamically modify the json that the content blocker reloads. 

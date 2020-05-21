@@ -10,6 +10,10 @@ import Foundation
 import SafariServices
 
 class BlockerManager {
+    func appIsInstalled(appName:String) -> Bool {
+        return UIApplication.shared.canOpenURL(NSURL(string: appName)! as URL)
+    }
+    
     func reloadBlocker() {
         SFContentBlockerManager.reloadContentBlocker(
             withIdentifier: "com.example.FeedAway.FeedRemover",
@@ -19,6 +23,7 @@ class BlockerManager {
                 NSLog(err.localizedDescription)
             } else {
                 NSLog("Finished reloading Content Blocker")
+                // This will pass even if the user has not given Safari Content Blocking Permissions.
             }
         })
     }

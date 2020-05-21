@@ -32,6 +32,11 @@ struct ContentView: View {
                 Text("Facebook Blocked!")
                     .font(.largeTitle)
             }
+            if BlockerManager().appIsInstalled(appName: "fb://") {
+                Text("You need to uninstall facebook")
+            } else {
+                Text("You uninstalled facebook! ")
+            }
         }
     }
 }

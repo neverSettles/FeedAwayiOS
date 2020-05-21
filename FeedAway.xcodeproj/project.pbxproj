@@ -121,11 +121,11 @@
 				28BB19722453F506000B85E6 /* AppDelegate.swift */,
 				28BB19742453F506000B85E6 /* SceneDelegate.swift */,
 				28BB19762453F506000B85E6 /* ContentView.swift */,
+				288C332A2456650500C017B5 /* BlockerManager.swift */,
+				28BB19802453F507000B85E6 /* Info.plist */,
 				28BB19782453F507000B85E6 /* Assets.xcassets */,
 				28BB197D2453F507000B85E6 /* LaunchScreen.storyboard */,
-				28BB19802453F507000B85E6 /* Info.plist */,
 				28BB197A2453F507000B85E6 /* Preview Content */,
-				288C332A2456650500C017B5 /* BlockerManager.swift */,
 			);
 			path = FeedAway;
 			sourceTree = "<group>";
