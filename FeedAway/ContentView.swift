@@ -21,6 +21,11 @@ struct ContentView: View {
         VStack {
             Text("Feed Away!")
             
+            if BlockerManager().extensionActivated()  {
+                Text("The FeedAway Extension is not activated on Safari Settings yet. Please activate.")
+            }
+            else {
+                Text("FeedAway Extension is activated! ")
             VStack {
                 if BlockerManager().appIsInstalled(appName: "fb://") {
                     Text("You first need to uninstall Facebook")
@@ -32,9 +37,7 @@ struct ContentView: View {
                     Image("facebook").resizable().frame(width: 32.0, height: 32.0)
                     Button(action: {
                         self.facebookChecked.toggle()
-                        if self.facebookChecked {
-                            BlockerManager().reloadBlocker(facebookChecked: self.facebookChecked, youtubeChecked: self.youtubeChecked)
-                        }
+                        BlockerManager().reloadBlocker(facebookChecked: self.facebookChecked, youtubeChecked: self.youtubeChecked)
                     })
                     {
                         Toggle(isOn: self.$facebookChecked) {
@@ -57,9 +60,7 @@ struct ContentView: View {
                     Image("youtube").resizable().frame(width: 32, height: 26.0)
                     Button(action: {
                         self.youtubeChecked.toggle()
-                        if self.youtubeChecked {
-                            BlockerManager().reloadBlocker(facebookChecked: self.facebookChecked, youtubeChecked: self.youtubeChecked)
-                        }
+                        BlockerManager().reloadBlocker(facebookChecked: self.facebookChecked, youtubeChecked: self.youtubeChecked)
                     })
                     {
                         Toggle(isOn: self.$youtubeChecked) {
@@ -72,6 +73,7 @@ struct ContentView: View {
             }
             
         }
+    }
     }
 }
 

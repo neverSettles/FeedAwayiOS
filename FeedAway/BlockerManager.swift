@@ -11,16 +11,37 @@ import SafariServices
 import MobileCoreServices
 import Foundation
 
+struct Constants {
+    static let width: CGFloat = 100
+    static let kExtensionIdentifier: String = "com.example.FeedAway.FeedRemover"
+}
+
 class BlockerManager {
     func appIsInstalled(appName:String) -> Bool {
         let canOpen = UIApplication.shared.canOpenURL(NSURL(string: appName)! as URL)
         return canOpen
     }
     
+    func extensionActivated() -> Bool {
+        var enabled = false;
+        SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: Constants.kExtensionIdentifier, completionHandler: { (state, error) in
+            if let error = error {
+                // TODO: handle the error
+                NSLog("Error collecting state of blocker: \(error).")
+            }
+            if let state = state {
+                let contentBlockerIsEnabled = state.isEnabled
+                // TODO: do something with this value
+                enabled = contentBlockerIsEnabled
+            }
+        })
+        return enabled
+    }
+    
     func reloadBlocker(facebookChecked:Bool, youtubeChecked:Bool) {
-        writeJSON()
+        writeCombinedJsonFile(facebookChecked:facebookChecked, youtubeChecked:youtubeChecked)
         SFContentBlockerManager.reloadContentBlocker(
-            withIdentifier: "com.example.FeedAway.FeedRemover",
+            withIdentifier: Constants.kExtensionIdentifier,
             completionHandler: { (maybeErr: Error?) -> Void in
             if let err = maybeErr {
                 NSLog("Error reloading Content Blocker:")
@@ -32,19 +53,50 @@ class BlockerManager {
         })
     }
     
-    func writeJSON() {
-        let selector = "div[role=main]" // Dynamically Generated
-        let dictionary = [[
-            "action": [ "type": "css-display-none", "selector": selector ],
-            "trigger": [ "url-filter": ".*" ]
-            ]]
+    
+    
+    fileprivate func loadJsonIntoRules(_ allRules: inout [[String : [String : String]]], _ jsonFileName: String) {
+        if let path = Bundle.main.path(forResource: jsonFileName, ofType: "json"){
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                if let jsonResult = jsonResult as? [[String : [String : String]]] {
+                    allRules.append(contentsOf: jsonResult)
+                }
+                else {
+                    NSLog("Malformed JSON")
+                }
+            } catch {
+                NSLog("Unexpected error: \(error).")
+            }
+        } else {
+            NSLog("Could not load file")
+        }
+    }
+    
+    func combineJsonFiles(facebookChecked:Bool, youtubeChecked:Bool) -> [[String : [String : String]]]  {
+        var allRules: [[String : [String : String]]] = []
+        
+        if facebookChecked {
+            loadJsonIntoRules(&allRules, "facebook")
+        }
+        if youtubeChecked {
+            loadJsonIntoRules(&allRules, "youtube")
+        }
+        
+        return allRules
+    }
+    
+    func writeCombinedJsonFile(facebookChecked:Bool, youtubeChecked:Bool) {
+        let dictionary = combineJsonFiles(facebookChecked:facebookChecked, youtubeChecked:youtubeChecked)
+        
         let jsonData = try! JSONSerialization.data(withJSONObject: dictionary, options: JSONSerialization.WritingOptions.prettyPrinted)
 
         //Convert back to string. Usually only do this for debugging
 
         if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
-            let file = "conbo.json"
-            if let dir = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.1a") {
+            let file = "combinedRuleset.json"
+            if let dir = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.rulesetSharing") {
                 let path     = dir.appendingPathComponent(file)
                 do {
                     try JSONString.write(to: path, atomically: false, encoding: String.Encoding.utf8)

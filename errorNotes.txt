@@ -1,7 +1,17 @@
 Error notes: 
 
-
+===================
 2020-05-21 18:15:05.245015-0500 FeedAway[932:146212] 
 -canOpenURL: failed for URL: "fb://" - error: "The operation couldn’t be completed. (OSStatus error -10814.)"
 
 This error means that the page could not be opened by the app, so therefore this is expected when the app in not installed. 
+
+===================
+
+For a while I was getting: 
+
+Bundle.main.url(forResource: "blockerList", withExtension: "json")
+returning nil. 
+
+I followed this post to fix it: 
+https://stackoverflow.com/questions/41775563/bundle-main-pathforresourceoftypeindirectory-returns-nil

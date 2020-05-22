@@ -11,20 +11,14 @@ import MobileCoreServices
 
 class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
     func beginRequest(with context: NSExtensionContext) {
-        let file = "conbo.json"
-        if let dir = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.1a") {
+        let file = "combinedRuleset.json"
+        if let dir = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.rulesetSharing") {
             let path     = dir.appendingPathComponent(file)
-            do {
-                do {
-                    let attachment =  NSItemProvider(contentsOf: path)!
-                    
-                    let item = NSExtensionItem()
-                    item.attachments = [attachment]
-
-                    context.completeRequest(returningItems: [item], completionHandler: nil)
-                }
-            }
+            let attachment =  NSItemProvider(contentsOf: path)!
+            
+            let item = NSExtensionItem()
+            item.attachments = [attachment]
+            context.completeRequest(returningItems: [item], completionHandler: nil)
         }
     }
-    
 }

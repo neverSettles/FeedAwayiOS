@@ -1,0 +1,12 @@
+[
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "div[role=main]"
+        },
+        "trigger": {
+            "url-filter": ".*m.facebook.com.*"
+        }
+    }
+]
+
