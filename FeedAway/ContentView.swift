@@ -11,32 +11,66 @@ import SafariServices
 //import BlockerManager
 
 struct ContentView: View {
-    @State private var facebook = false
+    @State private var facebookChecked = false
+    @State private var youtubeChecked = false
+    
+    @State private var facebookInstalled = false
+    @State private var youtubeInstalled = false
     
     var body: some View {
         VStack {
             Text("Feed Away!")
             
-            HStack {
-                Image("facebook").resizable()
-                .frame(width: 32.0, height: 32.0)
-                Button(action: {
-                    self.facebook.toggle()
-                    NSLog("Making call to reloadBlocker()")
-                    BlockerManager().reloadBlocker()
-                }) {
-                    Text("Reload Content Blocker")
+            VStack {
+                if BlockerManager().appIsInstalled(appName: "fb://") {
+                    Text("You first need to uninstall Facebook")
+                } else {
+                    Text("Congrats, Facebook is uninstalled!")
                 }
+                
+                HStack {
+                    Image("facebook").resizable().frame(width: 32.0, height: 32.0)
+                    Button(action: {
+                        self.facebookChecked.toggle()
+                        if self.facebookChecked {
+                            BlockerManager().reloadBlocker(facebookChecked: self.facebookChecked, youtubeChecked: self.youtubeChecked)
+                        }
+                    })
+                    {
+                        Toggle(isOn: self.$facebookChecked) {
+                            Text("Enable Facebook Feed Blocker")
+                        }
+                    }
+                }
+                .padding()
+                .disabled(BlockerManager().appIsInstalled(appName: "fb://"))
             }
-            if facebook {
-                Text("Facebook Blocked!")
-                    .font(.largeTitle)
+            
+            VStack {
+                if BlockerManager().appIsInstalled(appName: "youtube://") {
+                    Text("You first need to uninstall Youtube")
+                } else {
+                    Text("Congrats, Youtube is uninstalled!")
+                }
+                
+                HStack {
+                    Image("youtube").resizable().frame(width: 32, height: 26.0)
+                    Button(action: {
+                        self.youtubeChecked.toggle()
+                        if self.youtubeChecked {
+                            BlockerManager().reloadBlocker(facebookChecked: self.facebookChecked, youtubeChecked: self.youtubeChecked)
+                        }
+                    })
+                    {
+                        Toggle(isOn: self.$youtubeChecked) {
+                            Text("Enable Youtube Feed Blocker")
+                        }
+                    }
+                }
+                .padding()
+                .disabled(BlockerManager().appIsInstalled(appName: "youtube://"))
             }
-            if BlockerManager().appIsInstalled(appName: "fb://") {
-                Text("You need to uninstall facebook")
-            } else {
-                Text("You uninstalled facebook! ")
-            }
+            
         }
     }
 }

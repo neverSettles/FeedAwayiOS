@@ -1,0 +1,7 @@
+Error notes: 
+
+
+2020-05-21 18:15:05.245015-0500 FeedAway[932:146212] 
+-canOpenURL: failed for URL: "fb://" - error: "The operation couldn’t be completed. (OSStatus error -10814.)"
+
+This error means that the page could not be opened by the app, so therefore this is expected when the app in not installed. 
