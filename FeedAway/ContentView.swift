@@ -11,8 +11,7 @@ import SafariServices
 //import BlockerManager
 
 struct ContentView: View {
-    @State private var facebookChecked = false
-    @State private var youtubeChecked = false
+    @EnvironmentObject var userData: UserData
     
     @State private var facebookInstalled = false
     @State private var youtubeInstalled = false
@@ -36,11 +35,11 @@ struct ContentView: View {
                 HStack {
                     Image("facebook").resizable().frame(width: 32.0, height: 32.0)
                     Button(action: {
-                        self.facebookChecked.toggle()
-                        BlockerManager().reloadBlocker(facebookChecked: self.facebookChecked, youtubeChecked: self.youtubeChecked)
+                        self.userData.facebookChecked.toggle()
+                        BlockerManager().reloadBlocker(facebookChecked: self.userData.facebookChecked, youtubeChecked: self.userData.youtubeChecked)
                     })
                     {
-                        Toggle(isOn: self.$facebookChecked) {
+                        Toggle(isOn: $userData.facebookChecked) {
                             Text("Enable Facebook Feed Blocker")
                         }
                     }
@@ -59,11 +58,11 @@ struct ContentView: View {
                 HStack {
                     Image("youtube").resizable().frame(width: 32, height: 26.0)
                     Button(action: {
-                        self.youtubeChecked.toggle()
-                        BlockerManager().reloadBlocker(facebookChecked: self.facebookChecked, youtubeChecked: self.youtubeChecked)
+                        self.userData.youtubeChecked.toggle()
+                        BlockerManager().reloadBlocker(facebookChecked: self.userData.facebookChecked, youtubeChecked: self.userData.youtubeChecked)
                     })
                     {
-                        Toggle(isOn: self.$youtubeChecked) {
+                        Toggle(isOn: $userData.youtubeChecked) {
                             Text("Enable Youtube Feed Blocker")
                         }
                     }

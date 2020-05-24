@@ -10,9 +10,11 @@
 		2851A1FA24771B2B001F9AB2 /* youtubeBlockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2851A1F924771B2B001F9AB2 /* youtubeBlockerList.json */; };
 		2851A1FC24771B51001F9AB2 /* facebookBlockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2851A1FB24771B51001F9AB2 /* facebookBlockerList.json */; };
 		288C332B2456650500C017B5 /* BlockerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288C332A2456650500C017B5 /* BlockerManager.swift */; };
+		289922A0247A3434003F1CEF /* TrivialBase.json in Resources */ = {isa = PBXBuildFile; fileRef = 2899229F247A3434003F1CEF /* TrivialBase.json */; };
 		28ACFB8824781F1C0049A9D5 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 28BB199A2453F5B0000B85E6 /* blockerList.json */; };
 		28ACFB8D2478317C0049A9D5 /* facebook.json in Resources */ = {isa = PBXBuildFile; fileRef = 28ACFB8C2478317C0049A9D5 /* facebook.json */; };
 		28ACFB8F2478318A0049A9D5 /* youtube.json in Resources */ = {isa = PBXBuildFile; fileRef = 28ACFB8E2478318A0049A9D5 /* youtube.json */; };
+		28ACFB9124784B270049A9D5 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ACFB9024784B270049A9D5 /* UserData.swift */; };
 		28BB19732453F506000B85E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB19722453F506000B85E6 /* AppDelegate.swift */; };
 		28BB19752453F506000B85E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB19742453F506000B85E6 /* SceneDelegate.swift */; };
 		28BB19772453F506000B85E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB19762453F506000B85E6 /* ContentView.swift */; };
@@ -62,8 +64,10 @@
 		2851A1FD24776046001F9AB2 /* FeedAway.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FeedAway.entitlements; sourceTree = "<group>"; };
 		2851A1FE2477606C001F9AB2 /* FeedRemover.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FeedRemover.entitlements; sourceTree = "<group>"; };
 		288C332A2456650500C017B5 /* BlockerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerManager.swift; sourceTree = "<group>"; };
+		2899229F247A3434003F1CEF /* TrivialBase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TrivialBase.json; sourceTree = "<group>"; };
 		28ACFB8C2478317C0049A9D5 /* facebook.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = facebook.json; sourceTree = "<group>"; };
 		28ACFB8E2478318A0049A9D5 /* youtube.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = youtube.json; sourceTree = "<group>"; };
+		28ACFB9024784B270049A9D5 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		28BB196F2453F506000B85E6 /* FeedAway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedAway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28BB19722453F506000B85E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28BB19742453F506000B85E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 				28ACFB8C2478317C0049A9D5 /* facebook.json */,
 				28BB199A2453F5B0000B85E6 /* blockerList.json */,
 				28ACFB8E2478318A0049A9D5 /* youtube.json */,
+				2899229F247A3434003F1CEF /* TrivialBase.json */,
 			);
 			path = PredefinedRulesets;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 		28BB19662453F506000B85E6 = {
 			isa = PBXGroup;
 			children = (
+				28ACFB9024784B270049A9D5 /* UserData.swift */,
 				28BB19712453F506000B85E6 /* FeedAway */,
 				28BB19882453F507000B85E6 /* FeedAwayTests */,
 				28BB19992453F5B0000B85E6 /* FeedRemover */,
@@ -246,7 +252,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Christopher Settles";
 				TargetAttributes = {
 					28BB196E2453F506000B85E6 = {
@@ -289,6 +295,7 @@
 				28ACFB8824781F1C0049A9D5 /* blockerList.json in Resources */,
 				28ACFB8F2478318A0049A9D5 /* youtube.json in Resources */,
 				28ACFB8D2478317C0049A9D5 /* facebook.json in Resources */,
+				289922A0247A3434003F1CEF /* TrivialBase.json in Resources */,
 				28BB197F2453F507000B85E6 /* LaunchScreen.storyboard in Resources */,
 				28BB197C2453F507000B85E6 /* Preview Assets.xcassets in Resources */,
 				28BB19792453F507000B85E6 /* Assets.xcassets in Resources */,
@@ -322,6 +329,7 @@
 				288C332B2456650500C017B5 /* BlockerManager.swift in Sources */,
 				28BB19732453F506000B85E6 /* AppDelegate.swift in Sources */,
 				28BB19752453F506000B85E6 /* SceneDelegate.swift in Sources */,
+				28ACFB9124784B270049A9D5 /* UserData.swift in Sources */,
 				28BB19772453F506000B85E6 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -574,7 +582,6 @@
 		28BB19A32453F5B0000B85E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = FeedRemover/FeedRemover.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F55LJFNDC9;
@@ -595,7 +602,6 @@
 		28BB19A42453F5B0000B85E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = FeedRemover/FeedRemover.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F55LJFNDC9;

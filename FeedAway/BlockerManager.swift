@@ -23,6 +23,7 @@ class BlockerManager {
     }
     
     func extensionActivated() -> Bool {
+        // TODO : always true even when not activated. 
         var enabled = false;
         SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: Constants.kExtensionIdentifier, completionHandler: { (state, error) in
             if let error = error {
@@ -76,6 +77,8 @@ class BlockerManager {
     
     func combineJsonFiles(facebookChecked:Bool, youtubeChecked:Bool) -> [[String : [String : String]]]  {
         var allRules: [[String : [String : String]]] = []
+        
+        loadJsonIntoRules(&allRules, "TrivialBase")
         
         if facebookChecked {
             loadJsonIntoRules(&allRules, "facebook")

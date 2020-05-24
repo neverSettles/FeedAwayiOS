@@ -2,7 +2,16 @@
     {
         "action": {
             "type": "css-display-none",
-            "selector": "div[role=main]"
+            "selector": "#m_newsfeed_stream"
+        },
+        "trigger": {
+            "url-filter": ".*m.facebook.com.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "#MStoriesTray"
         },
         "trigger": {
             "url-filter": ".*m.facebook.com.*"
