@@ -2,10 +2,12 @@
     {
         "action": {
             "type": "css-display-none",
-            "selector": "div[role=main]"
+            "selector": "#ThisWillAlwaysBeAFalseRule"
         },
         "trigger": {
-            "url-filter": ".*m.facebook.com.*"
+            "url-filter": "/x\by/"
         }
     }
 ]
+
+

@@ -10,8 +10,46 @@ import SwiftUI
 import SafariServices
 //import BlockerManager
 
+struct ApplicationBlockerRow: View {
+    let application: Application
+    
+    let userSelections: UserSelections
+    
+    var body: some View {
+        VStack {
+            if application.appInstalled {
+                Text("You first need to uninstall " + application.displayName)
+            } else {
+                Text("Congrats, " + application.displayName + " is uninstalled!")
+            }
+            
+            HStack {
+                Image(application.resourceName).resizable().frame(width: 32.0, height: 32.0)
+                Button(action: {
+                    self.application.blockedChecked.toggle()
+                    BlockerManager().reloadBlocker(userSelections: self.userSelections)
+                })
+                {
+                    Toggle(isOn: application.$blockedChecked) {
+                        Text("Enable " + application.displayName + " Feed Blocker")
+                    }
+                }
+            }
+            .padding()
+            .disabled(application.appInstalled)
+        }
+    }
+}
+
+struct Application {
+    let displayName: String
+    let resourceName: String
+    let appInstalled: Bool
+    @Binding var blockedChecked: Bool
+}
+
 struct ContentView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var userSelections: UserSelections
     
     @State private var facebookInstalled = false
     @State private var youtubeInstalled = false
@@ -25,54 +63,14 @@ struct ContentView: View {
             }
             else {
                 Text("FeedAway Extension is activated! ")
-            VStack {
-                if BlockerManager().appIsInstalled(appName: "fb://") {
-                    Text("You first need to uninstall Facebook")
-                } else {
-                    Text("Congrats, Facebook is uninstalled!")
-                }
                 
-                HStack {
-                    Image("facebook").resizable().frame(width: 32.0, height: 32.0)
-                    Button(action: {
-                        self.userData.facebookChecked.toggle()
-                        BlockerManager().reloadBlocker(facebookChecked: self.userData.facebookChecked, youtubeChecked: self.userData.youtubeChecked)
-                    })
-                    {
-                        Toggle(isOn: $userData.facebookChecked) {
-                            Text("Enable Facebook Feed Blocker")
-                        }
-                    }
-                }
-                .padding()
-                .disabled(BlockerManager().appIsInstalled(appName: "fb://"))
-            }
-            
-            VStack {
-                if BlockerManager().appIsInstalled(appName: "youtube://") {
-                    Text("You first need to uninstall Youtube")
-                } else {
-                    Text("Congrats, Youtube is uninstalled!")
-                }
+                ApplicationBlockerRow(
+                    application: Application(displayName: "Facebook", resourceName: "facebook",  appInstalled: BlockerManager().appIsInstalled(appName: "fb://"), blockedChecked: $userSelections.facebookChecked), userSelections: userSelections
+                )
                 
-                HStack {
-                    Image("youtube").resizable().frame(width: 32, height: 26.0)
-                    Button(action: {
-                        self.userData.youtubeChecked.toggle()
-                        BlockerManager().reloadBlocker(facebookChecked: self.userData.facebookChecked, youtubeChecked: self.userData.youtubeChecked)
-                    })
-                    {
-                        Toggle(isOn: $userData.youtubeChecked) {
-                            Text("Enable Youtube Feed Blocker")
-                        }
-                    }
-                }
-                .padding()
-                .disabled(BlockerManager().appIsInstalled(appName: "youtube://"))
+                ApplicationBlockerRow(application: Application(displayName: "Youtube", resourceName: "youtube", appInstalled: BlockerManager().appIsInstalled(appName: "youtube://"), blockedChecked: $userSelections.youtubeChecked), userSelections: userSelections)
             }
-            
         }
-    }
     }
 }
 

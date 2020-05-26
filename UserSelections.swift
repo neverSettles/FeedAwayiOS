@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-final class UserData: ObservableObject  {
+final class UserSelections: ObservableObject  {
     @Published var facebookChecked = false
     @Published var youtubeChecked = false
 }

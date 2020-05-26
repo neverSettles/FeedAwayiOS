@@ -12,7 +12,6 @@ import MobileCoreServices
 import Foundation
 
 struct Constants {
-    static let width: CGFloat = 100
     static let kExtensionIdentifier: String = "com.example.FeedAway.FeedRemover"
 }
 
@@ -39,18 +38,18 @@ class BlockerManager {
         return enabled
     }
     
-    func reloadBlocker(facebookChecked:Bool, youtubeChecked:Bool) {
-        writeCombinedJsonFile(facebookChecked:facebookChecked, youtubeChecked:youtubeChecked)
+    func reloadBlocker(userSelections: UserSelections) {
+        writeCombinedJsonFile(userSelections: userSelections)
         SFContentBlockerManager.reloadContentBlocker(
             withIdentifier: Constants.kExtensionIdentifier,
             completionHandler: { (maybeErr: Error?) -> Void in
-            if let err = maybeErr {
-                NSLog("Error reloading Content Blocker:")
-                NSLog(err.localizedDescription)
-            } else {
-                NSLog("Finished reloading Content Blocker")
-                // This will pass even if the user has not given Safari Content Blocking Permissions.
-            }
+                if let err = maybeErr {
+                    NSLog("Error reloading Content Blocker:")
+                    NSLog(err.localizedDescription)
+                } else {
+                    NSLog("Finished reloading Content Blocker")
+                    // This will pass even if the user has not given Safari Content Blocking Permissions.
+                }
         })
     }
     
@@ -71,32 +70,32 @@ class BlockerManager {
                 NSLog("Unexpected error: \(error).")
             }
         } else {
-            NSLog("Could not load file")
+            NSLog("Could not load file: " + jsonFileName)
         }
     }
     
-    func combineJsonFiles(facebookChecked:Bool, youtubeChecked:Bool) -> [[String : [String : String]]]  {
+    func combineJsonFiles(userSelections: UserSelections) -> [[String : [String : String]]]  {
         var allRules: [[String : [String : String]]] = []
         
-        loadJsonIntoRules(&allRules, "TrivialBase")
+        loadJsonIntoRules(&allRules, "trivialBase")
         
-        if facebookChecked {
+        if userSelections.facebookChecked {
             loadJsonIntoRules(&allRules, "facebook")
         }
-        if youtubeChecked {
+        if userSelections.youtubeChecked {
             loadJsonIntoRules(&allRules, "youtube")
         }
         
         return allRules
     }
     
-    func writeCombinedJsonFile(facebookChecked:Bool, youtubeChecked:Bool) {
-        let dictionary = combineJsonFiles(facebookChecked:facebookChecked, youtubeChecked:youtubeChecked)
+    func writeCombinedJsonFile(userSelections: UserSelections) {
+        let dictionary = combineJsonFiles(userSelections: userSelections)
         
         let jsonData = try! JSONSerialization.data(withJSONObject: dictionary, options: JSONSerialization.WritingOptions.prettyPrinted)
-
+        
         //Convert back to string. Usually only do this for debugging
-
+        
         if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
             let file = "combinedRuleset.json"
             if let dir = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.rulesetSharing") {
