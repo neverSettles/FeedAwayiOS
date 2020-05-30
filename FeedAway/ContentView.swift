@@ -28,6 +28,7 @@ struct ApplicationBlockerRow: View {
                 Button(action: {
                     self.application.blockedChecked.toggle()
                     BlockerManager().reloadBlocker(userSelections: self.userSelections)
+                    UserDefaults.standard.set(self.application.blockedChecked, forKey: self.application.userDefaultsURL)
                 })
                 {
                     Toggle(isOn: application.$blockedChecked) {
@@ -44,31 +45,32 @@ struct ApplicationBlockerRow: View {
 struct Application {
     let displayName: String
     let resourceName: String
+    let userDefaultsURL: String
     let appInstalled: Bool
     @Binding var blockedChecked: Bool
 }
 
 struct ContentView: View {
-    @EnvironmentObject var userSelections: UserSelections
+    @State var userSelections = UserSelections(facebookChecked: UserDefaults.standard.bool(forKey: "facebookChecked"), youtubeChecked: UserDefaults.standard.bool(forKey: "youtubeChecked"))
     
-    @State private var facebookInstalled = false
-    @State private var youtubeInstalled = false
+    // Need this to be an ObservableObject instance so that we can update the values outside of the view! 
+    @ObservedObject var extensionActivatedObject = ExtensionActivatedObject()
     
     var body: some View {
         VStack {
             Text("Feed Away!")
             
-            if BlockerManager().extensionActivated()  {
+            if !extensionActivatedObject.extensionActivated  {
                 Text("The FeedAway Extension is not activated on Safari Settings yet. Please activate.")
             }
             else {
                 Text("FeedAway Extension is activated! ")
                 
                 ApplicationBlockerRow(
-                    application: Application(displayName: "Facebook", resourceName: "facebook",  appInstalled: BlockerManager().appIsInstalled(appName: "fb://"), blockedChecked: $userSelections.facebookChecked), userSelections: userSelections
+                    application: Application(displayName: "Facebook", resourceName: "facebook", userDefaultsURL: "facebookChecked",  appInstalled: BlockerManager().appIsInstalled(appName: "fb://"), blockedChecked: $userSelections.facebookChecked), userSelections: userSelections
                 )
                 
-                ApplicationBlockerRow(application: Application(displayName: "Youtube", resourceName: "youtube", appInstalled: BlockerManager().appIsInstalled(appName: "youtube://"), blockedChecked: $userSelections.youtubeChecked), userSelections: userSelections)
+                ApplicationBlockerRow(application: Application(displayName: "Youtube", resourceName: "youtube", userDefaultsURL: "youtubeChecked" , appInstalled: BlockerManager().appIsInstalled(appName: "youtube://"), blockedChecked: $userSelections.youtubeChecked), userSelections: userSelections)
             }
         }
     }

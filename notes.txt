@@ -148,3 +148,6 @@ I was able to see how to check to see if facebook was installed.
 I had to add 'fb' key to the Info.plist file, and then use UIApplication.shared.canOpenURL(fbUrl! as URL) to see if I can open "fb://" (As shown in code)
 
 To do next: Figure out how to dynamically modify the json that the content blocker reloads. 
+Done!
+
+Check to see if the content blocker has been enabled in settings before showing user options

@@ -21,21 +21,19 @@ class BlockerManager {
         return canOpen
     }
     
-    func extensionActivated() -> Bool {
+    enum ActivationResult {
+        case activated(Bool), failure(Error)
+    }
+    
+    func extensionActivated(completion: @escaping (ActivationResult) -> ()) {
         // TODO : always true even when not activated. 
-        var enabled = false;
         SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: Constants.kExtensionIdentifier, completionHandler: { (state, error) in
-            if let error = error {
-                // TODO: handle the error
-                NSLog("Error collecting state of blocker: \(error).")
-            }
-            if let state = state {
-                let contentBlockerIsEnabled = state.isEnabled
-                // TODO: do something with this value
-                enabled = contentBlockerIsEnabled
-            }
-        })
-        return enabled
+            if error != nil {
+                    completion(.failure(error!))
+                } else {
+                    completion(.activated(state!.isEnabled))
+                }
+            })
     }
     
     func reloadBlocker(userSelections: UserSelections) {

@@ -17,6 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var userData: UserSelections?
     
     func reconstructView(_ scene: UIScene){
+        // first check to see if the extension is activated.
+        BlockerManager().extensionActivated { result in
+            switch result {
+            case .activated(let active) :
+                self.contentView!.extensionActivatedObject.extensionActivated = active
+                let cat = "hi"
+            case .failure(let error): print(error)
+            }
+        }
+        
         // reload the content blocker right before loading up the content view.
         BlockerManager().reloadBlocker(userSelections: userData!)
         
@@ -39,9 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         contentView = ContentView()
         userData = UserSelections()
         
-        
-        reconstructView(scene)
-    }
+        }
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

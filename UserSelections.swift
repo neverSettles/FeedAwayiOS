@@ -12,4 +12,17 @@ import Combine
 final class UserSelections: ObservableObject  {
     @Published var facebookChecked = false
     @Published var youtubeChecked = false
+    
+    init() {
+        self.facebookChecked = false
+        self.youtubeChecked = false
+    }
+    init(facebookChecked: Bool, youtubeChecked: Bool) {
+        self.facebookChecked = facebookChecked
+        self.youtubeChecked = youtubeChecked
+    }
+}
+
+final class ExtensionActivatedObject: ObservableObject  {
+    @Published var extensionActivated = false
 }
