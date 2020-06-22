@@ -17,21 +17,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var userData: UserSelections?
     
     func reconstructView(_ scene: UIScene){
-        // first check to see if the extension is activated.
+        // call back to update view once the extensionActivated
+        // returns (it's an asynchronous call)
         BlockerManager().extensionActivated { result in
-            switch result {
-            case .activated(let active) :
-                self.contentView!.extensionActivatedObject.extensionActivated = active
-                let cat = "hi"
-            case .failure(let error): print(error)
+            DispatchQueue.main.async {
+                switch result {
+                case .activated(let active) :
+                    self.contentView!.extensionActivatedObject.extensionActivated = active
+                    // TODO: Even when enabled, opens up and says disabled.
+                case .failure(let error): print(error)
+                }
             }
         }
         
-        // reload the content blocker right before loading up the content view.
-        BlockerManager().reloadBlocker(userSelections: userData!)
-        
         // Create the SwiftUI view that provides the window contents.
-        
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
@@ -47,8 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         contentView = ContentView()
-        userData = UserSelections()
-        
+        userData = UserSelections()        
         }
     
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -51,9 +51,9 @@ struct Application {
 }
 
 struct ContentView: View {
-    @State var userSelections = UserSelections(facebookChecked: UserDefaults.standard.bool(forKey: "facebookChecked"), youtubeChecked: UserDefaults.standard.bool(forKey: "youtubeChecked"))
+    @ObservedObject var userSelections = UserSelections(facebookChecked: UserDefaults.standard.bool(forKey: "facebookChecked"), youtubeChecked: UserDefaults.standard.bool(forKey: "youtubeChecked"))
     
-    // Need this to be an ObservableObject instance so that we can update the values outside of the view! 
+    // Need this to be an ObservableObject instance so that we can update the values outside of the view!
     @ObservedObject var extensionActivatedObject = ExtensionActivatedObject()
     
     var body: some View {
@@ -62,6 +62,7 @@ struct ContentView: View {
             
             if !extensionActivatedObject.extensionActivated  {
                 Text("The FeedAway Extension is not activated on Safari Settings yet. Please activate.")
+                Image("FeedAwayInstall").resizable().frame(width: 32.0, height: 32.0)
             }
             else {
                 Text("FeedAway Extension is activated! ")
