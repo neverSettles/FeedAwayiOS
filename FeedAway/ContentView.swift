@@ -9,7 +9,11 @@
 import SwiftUI
 import SafariServices
 import AVFoundation
-//import BlockerManager
+
+import UIKit
+import AVKit
+import AVFoundation
+
 
 struct PlayerView: UIViewRepresentable {
   func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<PlayerView>) {
@@ -20,13 +24,23 @@ struct PlayerView: UIViewRepresentable {
 }
 
 class PlayerUIView: UIView {
+    var player: AVPlayer!
   private let playerLayer = AVPlayerLayer()
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    let url = URL(string: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8")!
-    let player = AVPlayer(url: url)
+guard let path = Bundle.main.path(forResource: "FeedAwayInstallShort", ofType:"mp4") else {
+        debugPrint("FeedAwayInstallShort.mp4 not found")
+        return
+    }
+    let player = AVPlayer(url: URL(fileURLWithPath: path))
     player.play()
+    self.player = player
+    
+    NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem, queue: .main) { [weak self] _ in
+        self?.player?.seek(to: CMTime.zero)
+        self?.player?.play()
+    }
     
     playerLayer.player = player
     layer.addSublayer(playerLayer)

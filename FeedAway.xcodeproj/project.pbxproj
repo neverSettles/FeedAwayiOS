@@ -23,6 +23,7 @@
 		28BB199B2453F5B0000B85E6 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 28BB199A2453F5B0000B85E6 /* blockerList.json */; };
 		28BB199D2453F5B0000B85E6 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB199C2453F5B0000B85E6 /* ContentBlockerRequestHandler.swift */; };
 		28BB19A12453F5B0000B85E6 /* FeedRemover.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 28BB19982453F5B0000B85E6 /* FeedRemover.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		28C4669624BACD0200E636DE /* FeedAwayInstallShort.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 28C4669524BACD0200E636DE /* FeedAwayInstallShort.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		28BB199A2453F5B0000B85E6 /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		28BB199C2453F5B0000B85E6 /* ContentBlockerRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerRequestHandler.swift; sourceTree = "<group>"; };
 		28BB199E2453F5B0000B85E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28C4669524BACD0200E636DE /* FeedAwayInstallShort.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = FeedAwayInstallShort.mp4; path = FeedAway/FeedAwayInstallShort.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		28BB19662453F506000B85E6 = {
 			isa = PBXGroup;
 			children = (
+				28C4669524BACD0200E636DE /* FeedAwayInstallShort.mp4 */,
 				28ACFB9024784B270049A9D5 /* UserSelections.swift */,
 				28BB19712453F506000B85E6 /* FeedAway */,
 				28BB19882453F507000B85E6 /* FeedAwayTests */,
@@ -290,6 +293,7 @@
 				28ACFB8824781F1C0049A9D5 /* blockerList.json in Resources */,
 				28ACFB8F2478318A0049A9D5 /* youtube.json in Resources */,
 				28ACFB8D2478317C0049A9D5 /* facebook.json in Resources */,
+				28C4669624BACD0200E636DE /* FeedAwayInstallShort.mp4 in Resources */,
 				28BB197F2453F507000B85E6 /* LaunchScreen.storyboard in Resources */,
 				28BB197C2453F507000B85E6 /* Preview Assets.xcassets in Resources */,
 				28BB19792453F507000B85E6 /* Assets.xcassets in Resources */,
