@@ -25,18 +25,19 @@ struct PlayerView: UIViewRepresentable {
 
 class PlayerUIView: UIView {
     var player: AVPlayer!
-  private let playerLayer = AVPlayerLayer()
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+    private let playerLayer = AVPlayerLayer()
     
-guard let path = Bundle.main.path(forResource: "FeedAwayInstallShort", ofType:"mp4") else {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        guard let path = Bundle.main.path(forResource: "FeedAwayInstallShort", ofType:"mp4") else {
         debugPrint("FeedAwayInstallShort.mp4 not found")
         return
     }
+
     let player = AVPlayer(url: URL(fileURLWithPath: path))
     player.play()
     self.player = player
-    
+
     NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem, queue: .main) { [weak self] _ in
         self?.player?.seek(to: CMTime.zero)
         self?.player?.play()
@@ -61,28 +62,34 @@ struct ApplicationBlockerRow: View {
     
     var body: some View {
         VStack {
-            if application.appInstalled {
-                Text("You first need to uninstall " + application.displayName)
-            } else {
-                Text("Congrats, " + application.displayName + " is uninstalled!")
-            }
-            
-            HStack {
-                Image(application.resourceName).resizable().frame(width: 32.0, height: 32.0)
-                Button(action: {
-                    self.application.blockedChecked.toggle()
-                    BlockerManager().reloadBlocker(userSelections: self.userSelections)
-                    UserDefaults.standard.set(self.application.blockedChecked, forKey: self.application.userDefaultsURL)
-                })
-                {
-                    Toggle(isOn: application.$blockedChecked) {
-                        Text("Enable " + application.displayName + " Feed Blocker")
-                    }
+            VStack {
+                if application.appInstalled {
+                    Text("You should uninstall " + application.displayName + " in order for this to be effective!")
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text("Good job, " + application.displayName + " is uninstalled!")
+                        .multilineTextAlignment(.center)
                 }
+                
+                HStack {
+                    Image(application.resourceName).resizable().frame(width: 32.0, height: 32.0)
+                    Button(action: {
+                        self.application.blockedChecked.toggle()
+                        BlockerManager().reloadBlocker(userSelections: self.userSelections)
+                        UserDefaults.standard.set(self.application.blockedChecked, forKey: self.application.userDefaultsURL)}){
+                            Toggle(isOn: application.$blockedChecked) {
+                                Text(application.displayName + " Feed Blocker")
+                            }
+                        }
+                }.padding().disabled(application.appInstalled)
+            if application.blockedChecked {
+                Text(application.displayName + " is being blocked on Safari.")
             }
-            .padding()
-            .disabled(application.appInstalled)
-        }
+            }.padding()
+                .overlay(RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.gray, lineWidth: 4)
+            )
+        }.padding(.bottom, 20.0)
     }
 }
 
@@ -103,13 +110,20 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Feed Away!")
+                .font(.title)
+                .multilineTextAlignment(.center)
+                .lineLimit(0)
+                .padding(.bottom, 15.0)
+                
             
             if !extensionActivatedObject.extensionActivated  {
-                Text("The FeedAway Extension is not activated on Safari Settings yet. Please activate.")
+                Text("The FeedAway Extension is not activated on Safari Settings yet. Please activate then return here.")
                 PlayerView()
             }
             else {
-                Text("FeedAway Extension is activated! ")
+                Text("FeedAway Extension is activated in settings. Good job.")
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 80.0)
                 
                 ApplicationBlockerRow(
                     application: Application(displayName: "Facebook", resourceName: "facebook", userDefaultsURL: "facebookChecked",  appInstalled: BlockerManager().appIsInstalled(appName: "fb://"), blockedChecked: $userSelections.facebookChecked), userSelections: userSelections

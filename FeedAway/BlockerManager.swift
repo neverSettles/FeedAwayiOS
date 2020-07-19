@@ -12,7 +12,7 @@ import MobileCoreServices
 import Foundation
 
 struct Constants {
-    static let kExtensionIdentifier: String = "com.example.FeedAway.FeedRemover"
+    static let kExtensionIdentifier: String = "com.chrissettles.FeedAway.FeedRemover"
 }
 
 class BlockerManager {
