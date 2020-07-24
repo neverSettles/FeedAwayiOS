@@ -63,14 +63,13 @@ struct ApplicationBlockerRow: View {
     var body: some View {
         VStack {
             VStack {
-                if application.appInstalled {
-                    Text("You should uninstall " + application.displayName + " in order for this to be effective!")
-                        .multilineTextAlignment(.center)
-                } else {
-                    Text("Good job, " + application.displayName + " is uninstalled!")
-                        .multilineTextAlignment(.center)
-                }
-                
+                VStack {
+                    if application.appInstalled {
+                        Text("You should uninstall the " + application.displayName + " app first!")
+                    } else {
+                        Text("Good job, " + application.displayName + " is uninstalled!")
+                    }
+                }.multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
                 HStack {
                     Image(application.resourceName).resizable().frame(width: 32.0, height: 32.0)
                     Button(action: {
@@ -83,7 +82,7 @@ struct ApplicationBlockerRow: View {
                         }
                 }.padding().disabled(application.appInstalled)
             if application.blockedChecked {
-                Text(application.displayName + " is being blocked on Safari.")
+                Text(application.displayName + " feed is being blocked on Safari.")
             }
             }.padding()
                 .overlay(RoundedRectangle(cornerRadius: 16)
@@ -117,7 +116,8 @@ struct ContentView: View {
                 
             
             if !extensionActivatedObject.extensionActivated  {
-                Text("The FeedAway Extension is not activated on Safari Settings yet. Please activate then return here.")
+                Text("Follow the instructions to enable FeedAway in settings then return here.")
+                .multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
                 PlayerView()
             }
             else {
