@@ -1,6 +1,44 @@
 [
     {
         "action": {
+            "comment": "Removes Rooms",
+            "type": "css-display-none",
+            "selector": "div[id='video_chats']"
+        },
+        "trigger": {
+            "url-filter": ".*facebook.com.*"
+        }
+    },
+    {
+        "action": {
+            "comment": "Removes adds from desktop facebook sites",
+            "type": "css-display-none",
+            "selector": "div[class='ego_unit_container']"
+        },
+        "trigger": {
+            "url-filter": ".*facebook.com.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "div[class='clearfix _ikh _1hx']"
+        },
+        "trigger": {
+            "url-filter": ".*facebook.com.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
+            "selector": "div[role='feed']"
+        },
+        "trigger": {
+            "url-filter": ".*facebook.com.*"
+        }
+    },
+    {
+        "action": {
             "type": "css-display-none",
             "selector": "#m_newsfeed_stream"
         },

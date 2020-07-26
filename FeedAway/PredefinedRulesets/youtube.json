@@ -2,6 +2,15 @@
     {
         "action": {
             "type": "css-display-none",
+            "selector": "#contents"
+        },
+        "trigger": {
+            "url-filter": ".*youtube.com.*"
+        }
+    },
+    {
+        "action": {
+            "type": "css-display-none",
             "selector": "div[tab-identifier=FEwhat_to_watch]"
         },
         "trigger": {

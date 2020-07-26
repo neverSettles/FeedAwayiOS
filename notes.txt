@@ -151,3 +151,35 @@ To do next: Figure out how to dynamically modify the json that the content block
 Done!
 
 Check to see if the content blocker has been enabled in settings before showing user options
+
+To add to facebook.json if I want to remove my name:
+    {
+        "action": {
+            "comment": "Removes top right name",
+            "type": "css-display-none",
+            "selector": "div[data-click='profile_icon']"
+        },
+        "trigger": {
+            "url-filter": ".*facebook.com.*"
+        }
+    },
+    {
+        "action": {
+            "comment": "Removes left side picture and name",
+            "type": "css-display-none",
+            "selector": "div[id='userNav']"
+        },
+        "trigger": {
+            "url-filter": ".*facebook.com.*"
+        }
+    },
+    {
+        "action": {
+            "comment": "Removes birthdays",
+            "type": "css-display-none",
+            "selector": "div[class='fbRemindersStory']"
+        },
+        "trigger": {
+            "url-filter": ".*facebook.com.*"
+        }
+    },
