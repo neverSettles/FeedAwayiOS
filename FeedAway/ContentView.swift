@@ -13,18 +13,24 @@ import UIKit
 import AVKit
 import AVFoundation
 
-struct ContentView: View {
+struct FeedAwayView: View {
     // Need this to be an ObservableObject instance so that we can update the values outside of the view!
     @ObservedObject var extensionActivatedObject = ExtensionActivatedObject()
     
     var body: some View {
+        if !extensionActivatedObject.extensionActivated  {
+            DeactivatedView()
+        }
+        else {
+            ActivatedView()
+        }
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
         VStack {
-            if !extensionActivatedObject.extensionActivated  {
-                DeactivatedView()
-            }
-            else {
-                ActivatedView()
-            }
+            FeedAwayView()
         }
     }
 }
