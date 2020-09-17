@@ -183,3 +183,14 @@ To add to facebook.json if I want to remove my name:
             "url-filter": ".*facebook.com.*"
         }
     },
+
+
+
+app preview sizes:
+6.5:
+2688x1242
+5.5:
+2208 x 1242
+3rd gen:
+
+2nd gen:
