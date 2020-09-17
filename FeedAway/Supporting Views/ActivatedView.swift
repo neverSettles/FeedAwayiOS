@@ -8,6 +8,14 @@
 
 import SwiftUI
 
+struct Application {
+    let displayName: String
+    let resourceName: String
+    let userDefaultsURL: String
+    let appInstalled: Bool
+    @Binding var blockedChecked: Bool
+}
+
 struct ActivatedView: View {
     @ObservedObject var userSelections = UserSelections(facebookChecked: UserDefaults.standard.bool(forKey: "facebookChecked"), youtubeChecked: UserDefaults.standard.bool(forKey: "youtubeChecked"))
     

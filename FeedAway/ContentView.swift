@@ -13,15 +13,6 @@ import UIKit
 import AVKit
 import AVFoundation
 
-
-struct Application {
-    let displayName: String
-    let resourceName: String
-    let userDefaultsURL: String
-    let appInstalled: Bool
-    @Binding var blockedChecked: Bool
-}
-
 struct ContentView: View {
     // Need this to be an ObservableObject instance so that we can update the values outside of the view!
     @ObservedObject var extensionActivatedObject = ExtensionActivatedObject()
