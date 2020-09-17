@@ -15,6 +15,8 @@
 		28ACFB9124784B270049A9D5 /* UserSelections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ACFB9024784B270049A9D5 /* UserSelections.swift */; };
 		28B5BE3A2513DA0E0058357A /* BlockedApplicationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B5BE392513DA0E0058357A /* BlockedApplicationRow.swift */; };
 		28B5BE402513DB300058357A /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B5BE3F2513DB300058357A /* VideoPlayer.swift */; };
+		28B5BE542513E5FB0058357A /* ActivatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B5BE532513E5FB0058357A /* ActivatedView.swift */; };
+		28B5BE5C2513E62A0058357A /* DeactivatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B5BE5B2513E62A0058357A /* DeactivatedView.swift */; };
 		28BB19732453F506000B85E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB19722453F506000B85E6 /* AppDelegate.swift */; };
 		28BB19752453F506000B85E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB19742453F506000B85E6 /* SceneDelegate.swift */; };
 		28BB19772453F506000B85E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB19762453F506000B85E6 /* ContentView.swift */; };
@@ -69,6 +71,8 @@
 		28ACFB9024784B270049A9D5 /* UserSelections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelections.swift; sourceTree = "<group>"; };
 		28B5BE392513DA0E0058357A /* BlockedApplicationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedApplicationRow.swift; sourceTree = "<group>"; };
 		28B5BE3F2513DB300058357A /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		28B5BE532513E5FB0058357A /* ActivatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatedView.swift; sourceTree = "<group>"; };
+		28B5BE5B2513E62A0058357A /* DeactivatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivatedView.swift; sourceTree = "<group>"; };
 		28BB196F2453F506000B85E6 /* FeedAway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedAway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28BB19722453F506000B85E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28BB19742453F506000B85E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 			children = (
 				28B5BE392513DA0E0058357A /* BlockedApplicationRow.swift */,
 				28B5BE3F2513DB300058357A /* VideoPlayer.swift */,
+				28B5BE532513E5FB0058357A /* ActivatedView.swift */,
+				28B5BE5B2513E62A0058357A /* DeactivatedView.swift */,
 			);
 			path = "Supporting Views";
 			sourceTree = "<group>";
@@ -157,12 +163,12 @@
 		28BB19712453F506000B85E6 /* FeedAway */ = {
 			isa = PBXGroup;
 			children = (
+				28BB19762453F506000B85E6 /* ContentView.swift */,
 				28B5BE3E2513DA8D0058357A /* Supporting Views */,
 				28BB19722453F506000B85E6 /* AppDelegate.swift */,
 				28BB19742453F506000B85E6 /* SceneDelegate.swift */,
 				2851A1FD24776046001F9AB2 /* FeedAway.entitlements */,
 				28ACFB89247830970049A9D5 /* PredefinedRulesets */,
-				28BB19762453F506000B85E6 /* ContentView.swift */,
 				288C332A2456650500C017B5 /* BlockerManager.swift */,
 				28BB19802453F507000B85E6 /* Info.plist */,
 				28BB19782453F507000B85E6 /* Assets.xcassets */,
@@ -342,6 +348,8 @@
 				28B5BE3A2513DA0E0058357A /* BlockedApplicationRow.swift in Sources */,
 				28BB19752453F506000B85E6 /* SceneDelegate.swift in Sources */,
 				28ACFB9124784B270049A9D5 /* UserSelections.swift in Sources */,
+				28B5BE542513E5FB0058357A /* ActivatedView.swift in Sources */,
+				28B5BE5C2513E62A0058357A /* DeactivatedView.swift in Sources */,
 				28BB19772453F506000B85E6 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
