@@ -108,26 +108,30 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Feed Away!")
-                .font(.title)
-                .multilineTextAlignment(.center)
-                .lineLimit(0)
-                .padding(.bottom, 15.0)
-                
-            
             if !extensionActivatedObject.extensionActivated  {
+                Text("You're almost there!")
+                    .font(.title)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(0)
+                    .padding(.bottom, 15.0)
+                
                 Text("Follow the instructions to enable FeedAway in settings then return here.")
                 .multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
                 PlayerView()
             }
             else {
+                Text("FeedAway!")
+                    .font(.title)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(0)
+                    .padding(.bottom, 15.0)
+                
                 Text("FeedAway Extension is activated in settings. Good job.")
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 80.0)
                 
                 ApplicationBlockerRow(
-                    application: Application(displayName: "Facebook", resourceName: "facebook", userDefaultsURL: "facebookChecked",  appInstalled: BlockerManager().appIsInstalled(appName: "fb://"), blockedChecked: $userSelections.facebookChecked), userSelections: userSelections
-                )
+                    application: Application(displayName: "Facebook", resourceName: "facebook", userDefaultsURL: "facebookChecked",  appInstalled: BlockerManager().appIsInstalled(appName: "fb://"), blockedChecked: $userSelections.facebookChecked), userSelections: userSelections)
                 
                 ApplicationBlockerRow(application: Application(displayName: "Youtube", resourceName: "youtube", userDefaultsURL: "youtubeChecked" , appInstalled: BlockerManager().appIsInstalled(appName: "youtube://"), blockedChecked: $userSelections.youtubeChecked), userSelections: userSelections)
             }
