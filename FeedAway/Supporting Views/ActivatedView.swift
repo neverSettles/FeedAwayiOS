@@ -29,14 +29,19 @@ struct ActivatedView: View {
             
             Text("FeedAway Extension is activated in settings. Good job.")
                 .multilineTextAlignment(.center)
-                .padding(.bottom, 80.0)
             
-            ShareSheetView()
+            HStack {
+                Text("Share FeedAway with friends")
+                ShareSheetView()
+            }
             
-            BlockedApplicationRow(
-                application: Application(displayName: "Facebook", resourceName: "facebook", userDefaultsURL: "facebookChecked",  appInstalled: BlockerManager().appIsInstalled(appName: "fb://"), blockedChecked: $userSelections.facebookChecked), userSelections: userSelections)
-            
-            BlockedApplicationRow(application: Application(displayName: "Youtube", resourceName: "youtube", userDefaultsURL: "youtubeChecked" , appInstalled: BlockerManager().appIsInstalled(appName: "youtube://"), blockedChecked: $userSelections.youtubeChecked), userSelections: userSelections)
+            VStack {
+                BlockedApplicationRow(
+                    application: Application(displayName: "Facebook", resourceName: "facebook", userDefaultsURL: "facebookChecked",  appInstalled: BlockerManager().appIsInstalled(appName: "fb://"), blockedChecked: $userSelections.facebookChecked), userSelections: userSelections)
+                
+                BlockedApplicationRow(application: Application(displayName: "Youtube", resourceName: "youtube", userDefaultsURL: "youtubeChecked" , appInstalled: BlockerManager().appIsInstalled(appName: "youtube://"), blockedChecked: $userSelections.youtubeChecked), userSelections: userSelections)
+            }
+            .padding(.bottom, 30)
         }
     }
 }

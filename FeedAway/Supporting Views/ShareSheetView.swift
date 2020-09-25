@@ -8,6 +8,9 @@
 
 import SwiftUI
 
+let appURL = "https://apps.apple.com/app/id1524223732"
+let shareMessage = "I'm using FeedAway to remove the facebook and youtube news feeds when using them on Safari. You should try it out too. Here's a link to download: " + appURL
+
 struct ShareSheetView: View {
     var body: some View {
         Button(action: actionSheet) {
@@ -19,8 +22,8 @@ struct ShareSheetView: View {
     }
     
     func actionSheet() {
-        let data = "Hey! I'm using FeedAway to "
-        let av = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+        
+        let av = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
