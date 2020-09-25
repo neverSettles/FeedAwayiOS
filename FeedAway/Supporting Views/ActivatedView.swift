@@ -31,6 +31,8 @@ struct ActivatedView: View {
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 80.0)
             
+            ShareSheetView()
+            
             BlockedApplicationRow(
                 application: Application(displayName: "Facebook", resourceName: "facebook", userDefaultsURL: "facebookChecked",  appInstalled: BlockerManager().appIsInstalled(appName: "fb://"), blockedChecked: $userSelections.facebookChecked), userSelections: userSelections)
             
