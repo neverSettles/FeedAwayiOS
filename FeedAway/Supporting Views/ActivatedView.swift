@@ -17,7 +17,7 @@ struct Application {
 }
 
 struct ActivatedView: View {
-    @ObservedObject var userSelections = UserSelections(facebookChecked: UserDefaults.standard.bool(forKey: "facebookChecked"), youtubeChecked: UserDefaults.standard.bool(forKey: "youtubeChecked"))
+    @ObservedObject var userSelections: UserSelections
     
     var body: some View {
         VStack {
@@ -48,6 +48,6 @@ struct ActivatedView: View {
 
 struct ActivatedView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivatedView()
+        ActivatedView(userSelections: UserSelections())
     }
 }

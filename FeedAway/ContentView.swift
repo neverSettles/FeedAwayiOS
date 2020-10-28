@@ -14,6 +14,8 @@ import AVKit
 import AVFoundation
 
 struct ContentView: View {
+    @ObservedObject var userSelections = UserSelections(facebookChecked: UserDefaults.standard.bool(forKey: "facebookChecked"), youtubeChecked: UserDefaults.standard.bool(forKey: "youtubeChecked"))
+    
     // Need this to be an ObservableObject instance so that we can update the values outside of the view!
     @ObservedObject var extensionActivatedObject = ExtensionActivatedObject()
     
@@ -23,7 +25,7 @@ struct ContentView: View {
                 DeactivatedView()
             }
             else {
-                ActivatedView()
+                ActivatedView(userSelections: userSelections)
             }
         }
     }
