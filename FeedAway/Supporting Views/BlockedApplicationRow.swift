@@ -11,6 +11,10 @@ import SwiftUI
 struct BlockedApplicationRow: View {
     let application: Application
     let userSelections: UserSelections
+    func CallReloadContentBlocker() -> String {
+        BlockerManager().reloadBlocker(userSelections: self.userSelections)
+        return ""
+    }
     
     var body: some View {
         VStack {
@@ -29,7 +33,7 @@ struct BlockedApplicationRow: View {
                         BlockerManager().reloadBlocker(userSelections: self.userSelections)
                         UserDefaults.standard.set(self.application.blockedChecked, forKey: self.application.userDefaultsURL)}){
                             Toggle(isOn: application.$blockedChecked) {
-                                Text(application.displayName + " Feed Blocker")
+                                Text(application.displayName + " Feed Blocker\(CallReloadContentBlocker())")
                             }
                         }
                 }.padding().disabled(application.appInstalled)
