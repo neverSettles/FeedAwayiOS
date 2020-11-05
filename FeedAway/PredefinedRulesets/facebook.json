@@ -39,6 +39,7 @@
     },
     {
         "action": {
+            "comment": "Removes Feed on mobile",
             "type": "css-display-none",
             "selector": "#m_newsfeed_stream"
         },
@@ -48,6 +49,17 @@
     },
     {
         "action": {
+            "comment": "Removes Videos on mobile",
+            "type": "css-display-none",
+            "selector": "#mobile_video_feed_pagelet"
+        },
+        "trigger": {
+            "url-filter": ".*m.facebook.com/watch.*"
+        }
+    },
+    {
+        "action": {
+            "comment": "Removes Stories",
             "type": "css-display-none",
             "selector": "#MStoriesTray"
         },
